@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  //console.log('a user connected');
 
   socket.on('joinRoom', () => {
     var dd = player.getPosPop();
@@ -18,13 +18,13 @@ io.on('connection', (socket) => {
     var pos = dd.slice(0, 1)
     var into = dd.slice(1)
 
-    console.log(into)
+    //console.log(into)
 
     socket.emit('song', { url: queue.popQueue[pos].split(' ').slice(0, 1), into: into})
   })
 
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    //console.log('user disconnected');
   });
 });
 

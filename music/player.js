@@ -3,7 +3,7 @@ let funcs = {}
 const db = require('./db/songs.json')
 const webS = require('../webserver/server.js')
 let poss = 0;
-let popS = 210;
+let popS = 0;
 funcs.playerPop = (pos, s) => {
   parseInt(pos)
   parseInt(s)
@@ -37,7 +37,6 @@ function broadCastPop(pos) {
 }
 
 funcs.getPosPop = () => {
-  console.log(poss + " " + popS)
   return `${poss} ${popS}`;                 
 }
 
