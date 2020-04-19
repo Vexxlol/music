@@ -33,7 +33,7 @@ module.exports.broadcast = (url, into) => {
 }
 
 module.exports.start = () => {
-  http.listen(3000, () => {
+  http.listen(80, () => {
     console.log('listening on *:3000');
   });
   player.playerPop(0, queue.popQueue[0].split(' ').slice(2, 3).toString());

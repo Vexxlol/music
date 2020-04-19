@@ -6,22 +6,24 @@ let poss = 0;
 let popS = 0;
 funcs.playerPop = (pos, s) => {
   parseInt(pos)
+  popS = 0;
   parseInt(s)
   poss = pos
-  setInterval(() => {
+  var timer = setInterval(() => {
     if (s >= popS) {
       // Keep playing!
       popS++;
+	console.log(`Song ${pos}, played ${popS} out of ${s}`)
     } else {
-
-      if (pos > parseInt(db.popQueue.length)) {
+	pos += 1
+      if (pos >= parseInt(db.popQueue.length)) {
         pos = 0;
         poss = pos
       } else {
-        pos += 1;
         poss = pos
       }
-
+      console.log(`Song ended: ${pos}`)
+      clearInterval(timer)
       return broadCastPop(pos);
     }
 
@@ -32,7 +34,6 @@ function broadCastPop(pos) {
   parseInt(pos)
   var length = parseInt(db.popQueue[pos].split(' ').slice(2, 3).toString())
   funcs.playerPop(pos, length)
-  popS = 0;
   webS.broadcast(db.popQueue[pos].split(' ').slice(0, 1).toString(), 0) 
 }
 
