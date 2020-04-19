@@ -3,6 +3,8 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var queue = require('../music/db/songs.json')
 
+var port = 3000
+
 var player = require('../music/player.js')
 
 app.get('/', (req, res) => {
@@ -11,6 +13,10 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   //console.log('a user connected');
+
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
 
   socket.on('joinRoom', () => {
     var dd = player.getPosPop();
@@ -33,8 +39,8 @@ module.exports.broadcast = (url, into) => {
 }
 
 module.exports.start = () => {
-  http.listen(80, () => {
-    console.log('listening on *:3000');
+  http.listen(port, () => {
+    console.log('listening on *:' + port);
   });
   player.playerPop(0, queue.popQueue[0].split(' ').slice(2, 3).toString());
 }
