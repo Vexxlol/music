@@ -3,7 +3,7 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var queue = require('../music/db/songs.json')
 
-var port = 3000
+var port = 80
 
 var player = require('../music/player.js')
 
@@ -43,4 +43,6 @@ module.exports.start = () => {
     console.log('listening on *:' + port);
   });
   player.playerPop(0, queue.popQueue[0].split(' ').slice(2, 3).toString());
+  setTimeout(() => {io.emit('update', 'update time!')}, 3000)
+  
 }

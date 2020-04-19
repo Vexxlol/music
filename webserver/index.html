@@ -10,12 +10,6 @@
 <meta property="og:image" content="" />
 <meta name="theme-color" content="#0341fc">
 <meta name="keywords" content="radio, online radio, pop radio, pop music, pop music 24/7, pop, music, music radio">
-<style>
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-</style>
-
 </head>
 <body>
 
@@ -40,14 +34,7 @@
 <center>
   <h3>Pop 24/7</h3>
   <span>The best pop songs 24/7 hand picked.</span><br>
-<iframe id="music" width="900" height="500" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
-<div style="float:right;margin-right:3%; height:550px;">
-  <ul id="messages" style="height:85%;"></ul>
-      <form action="" style="">
-        <input id="m" autocomplete="off" /> <button class="btn-primary">Send</button>
-      </form>
-  </center>
-</div>
+<iframe id="music" width="900" height="500" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </center> 
 <center>
   <span>Made with ❤️ by <a href="https://discord.gg/j4aQWx">Avex</a>.
 </center>
@@ -71,6 +58,11 @@
     console.log(data)
   })
 
+  socket.on('update', (data) => {
+    alert(`Hello, listener!\nWe are glad to announce that their is a new update available and this page will page will refresh automatically after clicking "okay", if it doesn't refresh then please manually refresh the page! \n\n Keep listening,\n  Avex!`)
+    location.replace("https://music.avexcodes.repl.co/")
+  })
+
 </script>
 
 <style>
@@ -81,17 +73,4 @@
 </style>
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
- $(function () {
-    var socket = io();
-    $('form').submit(function(e){
-      e.preventDefault(); // prevents page reloading
-      socket.emit('chat message', $('#m').val());
-      $('#m').val('');
-      return false;
-    });
-    socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(msg));
-    });
-  });
-</script>
+
